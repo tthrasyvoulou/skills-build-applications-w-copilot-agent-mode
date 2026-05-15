@@ -1,0 +1,52 @@
+:root {
+  --brand: #5e72e4;
+}
+
+body {
+  background-color: #f8f9fa;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  color: var(--brand) !important;
+}
+
+.card {
+  border: 0;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.05);
+}
+
+.endpoint {
+  font-size: 0.85rem;
+}
+
+.table-responsive {
+  margin-top: 0.5rem;
+}
+
+.modal pre {
+  background: #f6f8fa;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  max-height: 60vh;
+  overflow: auto;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(94,114,228,0.06);
+}
+
+.nav-link.active {
+  font-weight: 600;
+  color: var(--brand) !important;
+}
+
+.btn-link {
+  text-decoration: none;
+}
+
+.btn-close {
+  background: transparent;
+  border: none;
+}
