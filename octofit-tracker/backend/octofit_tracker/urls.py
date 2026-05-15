@@ -16,13 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
+import os
+
 from .views import (
     TeamViewSet,
     UserProfileViewSet,
     ActivityViewSet,
     LeaderboardEntryViewSet,
     WorkoutViewSet,
-    api_root,
 )
 
 router = DefaultRouter()
@@ -31,6 +35,33 @@ router.register(r'users', UserProfileViewSet, basename='user')
 router.register(r'activities', ActivityViewSet, basename='activity')
 router.register(r'leaderboard', LeaderboardEntryViewSet, basename='leaderboard')
 router.register(r'workouts', WorkoutViewSet, basename='workout')
+@api_view(['GET'])
+def api_root(request, format=None):
+    """API root that builds absolute URLs using the Codespace hostname when available.
+
+    If the environment variable `CODESPACE_NAME` is present we return URLs
+    using the Codespaces forwarded host (https://$CODESPACE_NAME-8000.app.github.dev).
+    Otherwise fall back to the incoming request host/scheme.
+    """
+    codespace = os.environ.get('CODESPACE_NAME')
+    if codespace:
+        host = f"{codespace}-8000.app.github.dev"
+        scheme = 'https'
+    else:
+        host = request.get_host()
+        scheme = request.scheme
+
+    def make_url(name):
+        path = reverse(name, request=None, format=format)
+        return f"{scheme}://{host}{path}"
+
+    return Response({
+        'teams': make_url('team-list'),
+        'users': make_url('user-list'),
+        'activities': make_url('activity-list'),
+        'leaderboard': make_url('leaderboard-list'),
+        'workouts': make_url('workout-list'),
+    })
 
 urlpatterns = [
     path('admin/', admin.site.urls),
