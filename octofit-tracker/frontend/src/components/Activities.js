@@ -7,9 +7,7 @@ export default function Activities() {
   const [showModal, setShowModal] = useState(false);
   const resource = 'activities';
   const codespace = process.env.REACT_APP_CODESPACE_NAME;
-  const endpoint = codespace
-    ? `https://${codespace}-8000.app.github.dev/api/${resource}/`
-    : `http://127.0.0.1:8000/api/${resource}/`;
+  const endpoint = `https://${codespace}-8000.app.github.dev/api/${resource}/`;
 
   const fetchData = () => {
     setLoading(true);
