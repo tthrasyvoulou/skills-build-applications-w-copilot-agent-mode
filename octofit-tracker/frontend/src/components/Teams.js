@@ -7,9 +7,7 @@ export default function Teams() {
   const [showModal, setShowModal] = useState(false);
   const resource = 'teams';
   const codespace = process.env.REACT_APP_CODESPACE_NAME;
-  const endpoint = codespace
-    ? `https://${codespace}-8000.app.github.dev/api/${resource}/`
-    : `http://127.0.0.1:8000/api/${resource}/`;
+  const endpoint = `https://super-space-journey-wr4qx9j7xqxgc9j5x-8000.app.github.dev/api/${resource}/`;
 
   const fetchData = () => {
     setLoading(true);
