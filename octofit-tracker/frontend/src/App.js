@@ -8,11 +8,16 @@ import Users from './components/Users';
 import Workouts from './components/Workouts';
 
 export default function App() {
+  const logoUrl = 'https://raw.githubusercontent.com/tthrasyvoulou/skills-build-applications-w-copilot-agent-mode/main/docs/octofitapp-small.png';
+
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbar-dark">
         <div className="container">
-          <NavLink className="navbar-brand" to="/">OctoFit Tracker</NavLink>
+          <NavLink className="navbar-brand" to="/">
+            <img src={logoUrl} alt="OctoFit" className="logo" />
+            <span>OctoFit Tracker</span>
+          </NavLink>
           <button
             className="navbar-toggler"
             type="button"
